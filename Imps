@@ -12,16 +12,16 @@ vault server -config=config.hcl
 
 export VAULT_ADDR=http://localhost:8200
 vault operator init -key-shares=1 -key-threshold=1
-vault operator unseal 4wyJRCey3MC6poALxuhoFmEgqT2DagwZeYK9+Jguqlg=
-vault login s.REIIiAiJGxGxIhR8GNE8DDMG
+vault operator unseal 4kM9ET7/G6d5996H/Tv1Mi6AEPSW5Sea0brmAn3ixxs=
+vault login s.GlHP9AjqxyCIseMcQhJNUNDg
 vault secrets enable -version=1 -path=secret kv
-helm init
+//helm init
 docker build . -t hyperledgerlabs/baf-build
 docker run -it -v $(pwd):/home/vimal974ever/Desktop/Blockchain/blockchain-automation-framework/ hyperledgerlabs/baf-build
 
 -----------------------------------------------------------
 
-Unseal Key 1: 4wyJRCey3MC6poALxuhoFmEgqT2DagwZeYK9+Jguqlg=
+Unseal Key 1: 4kM9ET7/G6d5996H/Tv1Mi6AEPSW5Sea0brmAn3ixxs=
 
-Initial Root Token: s.REIIiAiJGxGxIhR8GNE8DDMG
+Initial Root Token: s.GlHP9AjqxyCIseMcQhJNUNDg
 
