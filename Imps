@@ -1,3 +1,7 @@
+-----------------------------------------------------------
+STEPS TO REPRODUCE
+-----------------------------------------------------------
+
 minikube stop && minikube delete
 sudo minikube start --vm-driver=none --kubernetes-version=1.16.0
 sudo mv /home/vimal974ever/.kube /home/vimal974ever/.minikube $HOME
@@ -12,16 +16,23 @@ vault server -config=config.hcl
 
 export VAULT_ADDR=http://localhost:8200
 vault operator init -key-shares=1 -key-threshold=1
-vault operator unseal 4kM9ET7/G6d5996H/Tv1Mi6AEPSW5Sea0brmAn3ixxs=
-vault login s.GlHP9AjqxyCIseMcQhJNUNDg
+vault operator unseal pTPmc2O9+2b7hcLf4tv0+03/7nTfuNpFV8faLvBch2E=
+vault login s.Ggv3rrNKugCu2PPICKqgiOVE
 vault secrets enable -version=1 -path=secret kv
 //helm init
 docker build . -t hyperledgerlabs/baf-build
 docker run -it -v $(pwd):/home/vimal974ever/Desktop/Blockchain/blockchain-automation-framework/ hyperledgerlabs/baf-build
 
 -----------------------------------------------------------
+TOKENS
+-----------------------------------------------------------
 
-Unseal Key 1: 4kM9ET7/G6d5996H/Tv1Mi6AEPSW5Sea0brmAn3ixxs=
+Unseal Key 1: pTPmc2O9+2b7hcLf4tv0+03/7nTfuNpFV8faLvBch2E=
 
-Initial Root Token: s.GlHP9AjqxyCIseMcQhJNUNDg
+Initial Root Token: s.Ggv3rrNKugCu2PPICKqgiOVE
 
+-----------------------------------------------------------
+ISSUES
+-----------------------------------------------------------
+
+fatal: [localhost]: FAILED! => {"changed": true, "cmd": "export REVIEWER_TOKEN=$(KUBECONFIG=/home/vimal974ever/Desktop/Blockchain/blockchain-automation-framework/build/config kubectl get secret $(KUBECONFIG=/home/vimal974ever/Desktop/Blockchain/blockchain-automation-framework/build/config kubectl get serviceaccount -n ordorg-net vault-reviewer -o jsonpath={.secrets[0].name}) -n ordorg-net -o  jsonpath={.data.token} | base64 -d)\nvault write auth/ordorg-net-auth/config token_reviewer_jwt=\"$REVIEWER_TOKEN\" kubernetes_host=$(KUBECONFIG=/home/vimal974ever/Desktop/Blockchain/blockchain-automation-framework/build/config kubectl config view -o jsonpath=\"{.clusters[?(@.name==\\\"minikube\\\")].cluster.server}\") kubernetes_ca_cert=@\"./build/ordorg-net.ca.cert\"\n", "delta": "0:00:00.166404", "end": "2020-11-21 03:28:20.829253", "msg": "non-zero return code", "rc": 2, "start": "2020-11-21 03:28:20.662849", "stderr": "Error writing data to auth/ordorg-net-auth/config: Put http://localhost:8205/v1/auth/ordorg-net-auth/config: dial tcp 127.0.0.1:8205: connect: connection refused", "stderr_lines": ["Error writing data to auth/ordorg-net-auth/config: Put http://localhost:8205/v1/auth/ordorg-net-auth/config: dial tcp 127.0.0.1:8205: connect: connection refused"], "stdout": "", "stdout_lines": []}
